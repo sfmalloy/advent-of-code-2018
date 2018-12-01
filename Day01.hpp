@@ -24,7 +24,7 @@ static void solve2(std::ifstream& in, std::ostream& out) {
     int frequency = 0;
     std::string change;
 
-    std::vector<int> values;W
+    std::vector<int> values;
 
     while (in >> change) {
         int changeNum = std::stoi(change.substr(1));
