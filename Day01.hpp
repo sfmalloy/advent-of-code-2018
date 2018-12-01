@@ -39,9 +39,7 @@ static void solve2(std::ifstream& in, std::ostream& out) {
     for (size_t i = 0; foundF; ++i) {
         frequency += values[i];
         foundF = found.insert(frequency).second;
-
-        if (i == values.size() - 1)
-            i = -1;
+        values.push_back(values[i % values.size()]);
     }
 
     out << frequency << std::endl;
