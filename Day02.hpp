@@ -4,7 +4,10 @@
 #include <string>
 #include <vector>
 
-void solve(std::ifstream& in, std::ostream& out) {
+#include "Day.hpp"
+
+template<>
+void Day<2>::solve1(std::ifstream& in, std::ostream& out) {
     std::string line;
 
     int twoCount = 0, threeCount = 0;
@@ -34,7 +37,8 @@ void solve(std::ifstream& in, std::ostream& out) {
     
 }
 
-void solve2(std::ifstream& in, std::ostream& out) {
+template<>
+void Day<2>::solve2(std::ifstream& in, std::ostream& out) {
     std::string line;
 
     std::vector<std::string> boxes;
