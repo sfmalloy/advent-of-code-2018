@@ -4,33 +4,25 @@
 #include <vector>
 #include <unordered_set>
 
-static void solve(std::ifstream& in, std::ostream& out) {
+void solve(std::ifstream& in, std::ostream& out) {
     int frequency = 0;
     std::string change;
 
     while (in >> change) {
-        int changeNum = std::stoi(change.substr(1));
-        if(change[0] == '+')
-            frequency += changeNum;
-        else
-            frequency -= changeNum;
+        frequency += std::stoi(change);
     }
 
     out << frequency << std::endl;
 }
 
-static void solve2(std::ifstream& in, std::ostream& out) {
+void solve2(std::ifstream& in, std::ostream& out) {
     int frequency = 0;
     std::string change;
 
     std::vector<int> values;
 
     while (in >> change) {
-        int changeNum = std::stoi(change.substr(1));
-        if(change[0] == '+')
-            values.push_back(changeNum);
-        else
-            values.push_back(-changeNum);
+        values.push_back(std::stoi(change));
     }
 
     std::unordered_set<int> found;

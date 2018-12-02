@@ -4,7 +4,7 @@
 #include <string>
 #include <vector>
 
-static void solve(std::ifstream& in, std::ostream& out) {
+void solve(std::ifstream& in, std::ostream& out) {
     std::string line;
 
     int twoCount = 0, threeCount = 0;
@@ -34,7 +34,7 @@ static void solve(std::ifstream& in, std::ostream& out) {
     
 }
 
-static void solve2(std::ifstream& in, std::ostream& out) {
+void solve2(std::ifstream& in, std::ostream& out) {
     std::string line;
 
     std::vector<std::string> boxes;
