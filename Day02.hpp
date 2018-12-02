@@ -16,7 +16,7 @@ static void solve(std::ifstream& in, std::ostream& out) {
 
         bool foundTwo = false, foundThree = false;
         
-        for (const std::pair<char, int> pair : letters) {
+        for (const std::pair<char, int>& pair : letters) {
             if (pair.second == 2 && !foundTwo) {
                 ++twoCount;
                 foundTwo = true;
