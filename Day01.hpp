@@ -2,7 +2,7 @@
 #include <fstream>
 #include <string>
 #include <vector>
-#include <set>
+#include <unordered_set>
 
 static void solve(std::ifstream& in, std::ostream& out) {
     int frequency = 0;
@@ -33,7 +33,7 @@ static void solve2(std::ifstream& in, std::ostream& out) {
             values.push_back(-changeNum);
     }
 
-    std::set<int> found;
+    std::unordered_set<int> found;
     bool foundF = true;
 
     for (size_t i = 0; foundF; ++i) {
