@@ -4,7 +4,10 @@
 #include <vector>
 #include <unordered_set>
 
-void solve(std::ifstream& in, std::ostream& out) {
+#include "Day.hpp"
+
+template<>
+void Day<1>::solve1(std::ifstream& in, std::ostream& out) {
     int frequency = 0;
     std::string change;
 
@@ -15,7 +18,8 @@ void solve(std::ifstream& in, std::ostream& out) {
     out << frequency << std::endl;
 }
 
-void solve2(std::ifstream& in, std::ostream& out) {
+template<>
+void Day<1>::solve2(std::ifstream& in, std::ostream& out) {
     int frequency = 0;
     std::string change;
 
