@@ -17,11 +17,11 @@ For all days:
     
     $ ./Advent -a
 
-Times:
-I obtained times from my desktop running Antergos and gcc 8.2.1.  Times are gotten as an average of 5.
 
 **Timings**
 ----------------------------------
+I obtained times from my desktop running Antergos and gcc 8.2.1.  Times are gotten as an average of 5.
+
  Day # | Time (in ms) | # of Lines
 -------|--------------|-----------
    1   |    59.126    |    43
