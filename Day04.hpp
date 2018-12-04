@@ -15,11 +15,7 @@
 
 struct TimeStamp {
     int month, day, hour, minute;
-    std::string status = "a";
-
-    std::string stampText = std::to_string(month) + "-" + std::to_string(day) 
-                            + " " + std::to_string(hour) + ":" + std::to_string(minute)
-                            + " " + status;
+    std::string status;
 };
 
 std::vector<TimeStamp> getTimeStamps(std::ifstream& in);
