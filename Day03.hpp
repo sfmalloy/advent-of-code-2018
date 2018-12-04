@@ -46,9 +46,8 @@ void Day<3>::solve2(std::ifstream& in, std::ostream& out) {
                     break;
                 }
             }
-            if (!intact) {
+            if (!intact)
                 break;
-            }
         }
 
         if (intact) {
