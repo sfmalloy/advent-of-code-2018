@@ -7,6 +7,7 @@
 // Finished days
 #include "Day01.hpp"
 #include "Day02.hpp"
+#include "Day03.hpp"
 
 void runSingle(const int& day);
 
@@ -50,6 +51,10 @@ void runSingle(const int& day) {
         case 2:
             Day<2>::solve1(in1, std::cout);
             Day<2>::solve2(in2, std::cout);
+            break;
+        case 3:
+            Day<3>::solve1(in1, std::cout);
+            Day<3>::solve2(in2, std::cout);
             break;
         default:
             std::cout << "Day not complete";
