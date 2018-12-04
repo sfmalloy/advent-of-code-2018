@@ -40,6 +40,7 @@
         "deque": "cpp",
         "list": "cpp",
         "numeric": "cpp",
-        "ratio": "cpp"
+        "ratio": "cpp",
+        "functional": "cpp"
     }
 }
