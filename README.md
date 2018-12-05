@@ -28,4 +28,4 @@ I obtained times from my desktop running Antergos and gcc 8.2.1.  Times are gott
    2   |    23.378    |    78
    3   |    29.211    |    95
    4   |    6.858     |   162
-   5   |              |   
+   5   |    4937.550  |    78
