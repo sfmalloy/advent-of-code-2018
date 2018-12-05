@@ -41,6 +41,7 @@
         "list": "cpp",
         "numeric": "cpp",
         "ratio": "cpp",
-        "functional": "cpp"
+        "functional": "cpp",
+        "iomanip": "cpp"
     }
 }
