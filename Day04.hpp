@@ -146,7 +146,7 @@ void sortStamps(std::vector<TimeStamp>& stamps) {
 std::unordered_map<int, std::vector<std::pair<int, int>>> mapStamps(const std::vector<TimeStamp>& stamps) {
     std::unordered_map<int, std::vector<std::pair<int, int>>> idToSleep;
     
-    int id, startSleep;
+    int id, startSleep = 0;
     for (const TimeStamp& s : stamps) {
         if (s.status.find('G') != std::string::npos) {
             size_t start = s.status.find("#");

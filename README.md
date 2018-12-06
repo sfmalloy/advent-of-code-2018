@@ -3,7 +3,7 @@
 These are my solutions to Advent of Code 2018.
 If you want to download and run for yourself then compile using:
     
-    $ g++ -Wall Advent.cc -o Advent
+    $ g++ -Wall -O3 Advent.cc -o Advent
 
 (makefile coming soon...)
 
