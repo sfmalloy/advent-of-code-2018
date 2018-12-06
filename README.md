@@ -20,7 +20,7 @@ For all days:
 
 **Timings**
 ----------------------------------
-I obtained times from my desktop running Antergos and g++ 8.2.1.  Times are gotten as an average of 5.
+I obtained times from my desktop running Antergos and g++ 8.2.1.  Times are gotten as an average of 5 and by running part 1 and 2 in the same run (not seperately).
 
  Day # | Time (in ms) | # of Lines
 -------|--------------|-----------
