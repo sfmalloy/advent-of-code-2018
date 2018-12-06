@@ -35,7 +35,7 @@ void Day<3>::solve2(std::ifstream& in, std::ostream& out) {
     std::vector<Claim> claims = getClaims(in);
     std::vector<std::vector<int>> fabric = proccessClaims(claims);
 
-    Claim best;
+    Claim best = claims[0];
 
     for (Claim c : claims) {
         bool intact = true;
