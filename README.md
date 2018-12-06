@@ -20,12 +20,12 @@ For all days:
 
 **Timings**
 ----------------------------------
-I obtained times from my desktop running Antergos and gcc 8.2.1.  Times are gotten as an average of 5.
+I obtained times from my desktop running Antergos and g++ 8.2.1.  Times are gotten as an average of 5.
 
  Day # | Time (in ms) | # of Lines
 -------|--------------|-----------
-   1   |    59.126    |    43
-   2   |    23.378    |    78
-   3   |    29.211    |    95
-   4   |    6.858     |   162
-   5   |    4937.550  |    78
+   1   |    14.008    |    43
+   2   |    3.573     |    78
+   3   |    5.626     |    95
+   4   |    2.232     |   162
+   5   |    1786.192  |    78
