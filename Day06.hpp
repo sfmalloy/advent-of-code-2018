@@ -12,56 +12,91 @@ std::vector<std::pair<int, int>> getCoords(std::ifstream& in);
 
 template<>
 void Day<6>::solve1(std::ifstream& in, std::ostream& out) {
-    std::vector<std::pair<int, int>> coords = getCoords(in);
-    
-    int xMax = std::max_element(coords.begin(), coords.end())->first;
-    int yMax = std::max_element(coords.begin(), coords.end(), [](const std::pair<int, int>& a, const std::pair<int, int>& b)
-                                                                { return a.second < b.second; })->second;
+    auto coords = getCoords(in);
 
+    int xMax = std::max_element(coords.begin(), coords.end())->first;
+    int yMax = std::max_element(coords.begin(), coords.end(), [](const auto& p1, const auto& p2) { return p1.second < p2.second; })->second;
     std::vector<std::pair<int, int>> exclusions;
 
     for (int y = 0; y <= yMax; ++y) {
-        for (int x = 0; x <= xMax; ++x) {
-            if (y == 0 || y == yMax || x == 0 || x == xMax) {
+        for (int x = 0; x <= xMax + 1; ++x) {
+            if (x == 0 || x == xMax || y == 0 || y == yMax) {
                 int distance = yMax * xMax;
-                std::pair<int, int> point;
-
+                std::pair<int, int> currPair;
                 for (const auto& c : coords) {
-                    int currDistance = std::abs(y - c.second) + std::abs(y - c.first);
+                    int currDistance = std::abs(c.second - y) + std::abs(c.first - x);
+
                     if (currDistance < distance) {
-                        point = c;
                         distance = currDistance;
+                        currPair = c;
                     }
                 }
 
-                if (std::find(exclusions.begin(), exclusions.end(), point) == exclusions.end()) {
-                    bool isUnique = true;
-                    for (const auto& c : coords) {
-                        int currDistance = std::abs(y - c.second) + std::abs(y - c.first);
-                        if (c != point && distance == currDistance) {
-                            isUnique = false;
-                            break;
-                        }
-                    }
-
-                    if (isUnique)
-                        exclusions.push_back(point);
+                if (std::find(exclusions.begin(), exclusions.end(), currPair) == exclusions.end()) {
+                    exclusions.push_back(currPair);
                 }
             }
         }
     }
 
-    out << std::endl;
-    for (const auto& c : exclusions) {
-        out << c.first << ", " << c.second << std::endl;
+    std::map<std::pair<int, int>, int> areas;
+
+    for (int y = 0; y <= yMax; ++y) {
+        for (int x = 0; x <= xMax; ++x) {
+            int distance = yMax * xMax;
+            std::pair<int, int> currPair;
+            std::map<int, int> distCount;
+
+            for (const auto& c : coords) {
+                int currDistance = std::abs(c.second - y) + std::abs(c.first - x);
+
+                ++distCount[currDistance];
+                if (currDistance < distance) {
+                    distance = currDistance;
+                    currPair = c;
+                }
+            }
+
+            if (distCount[distance] == 1) {
+                if (std::find(exclusions.begin(), exclusions.end(), currPair) == exclusions.end()) {
+                    ++areas[currPair];
+                }
+            }
+        }
     }
 
+    int maxArea = 0;
+    for (const auto& p : areas) {
+        if (maxArea < p.second) {
+            maxArea = p.second;
+        }
+    }
 
+    out << maxArea << std::endl;
 }
 
 template<>
 void Day<6>::solve2(std::ifstream& in, std::ostream& out) {
-    
+    auto coords = getCoords(in);
+
+    int xMax = std::max_element(coords.begin(), coords.end())->first;
+    int yMax = std::max_element(coords.begin(), coords.end(), [](const auto& p1, const auto& p2) { return p1.second < p2.second; })->second;
+
+    int upper = 10000, area = 0;
+
+    for (int y = 0; y <= yMax; ++y) {
+        for (int x = 0; x <= xMax; ++x) {
+            int distance = 0;
+            for (const auto& c : coords) {
+                distance += std::abs(c.second - y) + std::abs(c.first - x);
+            }
+
+            if (distance < upper)
+                ++area;
+        }
+    }
+
+    out << area << std::endl;
 }
 
 std::vector<std::pair<int, int>> getCoords(std::ifstream& in) {
