@@ -4,7 +4,7 @@
 #include <tuple>
 #include <algorithm>
 #include <numeric>
-#include <unordered_map>
+#include <map>
 
 #include "Day.hpp"
 
@@ -13,23 +13,50 @@ std::vector<std::pair<int, int>> getCoords(std::ifstream& in);
 template<>
 void Day<6>::solve1(std::ifstream& in, std::ostream& out) {
     std::vector<std::pair<int, int>> coords = getCoords(in);
-    std::sort(coords.begin(), coords.end());
-    int xMax = coords[coords.size() - 1].first;
-    int yMax = std::max_element(coords.begin(), coords.end(), [](const std::pair<int,int>& a, const std::pair<int,int>& b) 
+    
+    int xMax = std::max_element(coords.begin(), coords.end())->first;
+    int yMax = std::max_element(coords.begin(), coords.end(), [](const std::pair<int, int>& a, const std::pair<int, int>& b)
                                                                 { return a.second < b.second; })->second;
 
+    std::vector<std::pair<int, int>> exclusions;
 
-    std::unordered_map<std::pair<int, int>, std::vector<std::pair<int, int>> coordMap;
+    for (int y = 0; y <= yMax; ++y) {
+        for (int x = 0; x <= xMax; ++x) {
+            if (y == 0 || y == yMax || x == 0 || x == xMax) {
+                int distance = yMax * xMax;
+                std::pair<int, int> point;
 
-    for (size_t i = 0; i < yMax + 1; ++i) {
-        for (size_t j = 0; j < xMax; ++j) {
-            std::pair<int, int> currCord;
+                for (const auto& c : coords) {
+                    int currDistance = std::abs(y - c.second) + std::abs(y - c.first);
+                    if (currDistance < distance) {
+                        point = c;
+                        distance = currDistance;
+                    }
+                }
 
-            for (auto p : coords) {
+                if (std::find(exclusions.begin(), exclusions.end(), point) == exclusions.end()) {
+                    bool isUnique = true;
+                    for (const auto& c : coords) {
+                        int currDistance = std::abs(y - c.second) + std::abs(y - c.first);
+                        if (c != point && distance == currDistance) {
+                            isUnique = false;
+                            break;
+                        }
+                    }
 
+                    if (isUnique)
+                        exclusions.push_back(point);
+                }
             }
         }
     }
+
+    out << std::endl;
+    for (const auto& c : exclusions) {
+        out << c.first << ", " << c.second << std::endl;
+    }
+
+
 }
 
 template<>
