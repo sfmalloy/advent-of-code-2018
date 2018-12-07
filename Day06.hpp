@@ -12,24 +12,67 @@ std::vector<std::pair<int, int>> getCoords(std::ifstream& in);
 
 template<>
 void Day<6>::solve1(std::ifstream& in, std::ostream& out) {
-    std::vector<std::pair<int, int>> coords = getCoords(in);
-    std::sort(coords.begin(), coords.end());
-    int xMax = coords[coords.size() - 1].first;
-    int yMax = std::max_element(coords.begin(), coords.end(), [](const std::pair<int,int>& a, const std::pair<int,int>& b) 
-                                                                { return a.second < b.second; })->second;
+    auto coords = getCoords(in);
 
+    int xMax = std::max_element(coords.begin(), coords.end())->first;
+    int yMax = std::max_element(coords.begin(), coords.end(), [](const auto& p1, const auto& p2) { return p1.second < p2.second; })->second;
+    std::vector<std::pair<int, int>> exclusions;
 
-    std::unordered_map<std::pair<int, int>, std::vector<std::pair<int, int>> coordMap;
+    for (int y = 0; y <= yMax; ++y) {
+        for (int x = 0; x <= xMax + 1; ++x) {
+            if (x == 0 || x == xMax || y == 0 || y == yMax) {
+                int distance = yMax * xMax;
+                std::pair<int, int> currPair;
+                for (const auto& c : coords) {
+                    int currDistance = std::abs(c.second - y) + std::abs(c.first - x);
 
-    for (size_t i = 0; i < yMax + 1; ++i) {
-        for (size_t j = 0; j < xMax; ++j) {
-            std::pair<int, int> currCord;
+                    if (currDistance < distance) {
+                        distance = currDistance;
+                        currPair = c;
+                    }
+                }
 
-            for (auto p : coords) {
-
+                if (std::find(exclusions.begin(), exclusions.end(), currPair) == exclusions.end()) {
+                    exclusions.push_back(currPair);
+                }
             }
         }
     }
+
+    std::map<std::pair<int, int>, int> areas;
+
+    for (int y = 0; y <= yMax; ++y) {
+        for (int x = 0; x <= xMax; ++x) {
+            int distance = yMax * xMax;
+            std::pair<int, int> currPair;
+            std::map<int, int> distCount;
+
+            for (const auto& c : coords) {
+                int currDistance = std::abs(c.second - y) + std::abs(c.first - x);
+
+                ++distCount[currDistance];
+                if (currDistance < distance) {
+                    distance = currDistance;
+                    currPair = c;
+                }
+            }
+
+            if (distCount[distance] == 1) {
+                if (std::find(exclusions.begin(), exclusions.end(), currPair) == exclusions.end()) {
+                    ++areas[currPair];
+                }
+            }
+        }
+    }
+
+    int maxArea = 0;
+    for (const auto& p : areas) {
+        if (maxArea < p.second) {
+            maxArea = p.second;
+        }
+    }
+
+    out << maxArea << std::endl;
 }
 
 template<>
