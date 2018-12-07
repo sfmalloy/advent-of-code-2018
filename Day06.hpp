@@ -77,7 +77,26 @@ void Day<6>::solve1(std::ifstream& in, std::ostream& out) {
 
 template<>
 void Day<6>::solve2(std::ifstream& in, std::ostream& out) {
-    
+    auto coords = getCoords(in);
+
+    int xMax = std::max_element(coords.begin(), coords.end())->first;
+    int yMax = std::max_element(coords.begin(), coords.end(), [](const auto& p1, const auto& p2) { return p1.second < p2.second; })->second;
+
+    int upper = 10000, area = 0;
+
+    for (int y = 0; y <= yMax; ++y) {
+        for (int x = 0; x <= xMax; ++x) {
+            int distance = 0;
+            for (const auto& c : coords) {
+                distance += std::abs(c.second - y) + std::abs(c.first - x);
+            }
+
+            if (distance < upper)
+                ++area;
+        }
+    }
+
+    out << area << std::endl;
 }
 
 std::vector<std::pair<int, int>> getCoords(std::ifstream& in) {
