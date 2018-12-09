@@ -13,12 +13,13 @@
 #include "Day04.hpp"
 #include "Day05.hpp"
 #include "Day06.hpp"
+#include "Day08.hpp"
 
 void runSingle(const int& day);
 
 void runAll();
 
-const int DAYS_COMPLETED = 4;
+const int DAYS_COMPLETED = 7;
 
 int main(int argc, char* argv[]) {
     if (argc < 2) {
@@ -97,6 +98,14 @@ void runSingle(const int& day) {
             Day<6>::solve1(in1, std::cout);
             std::cout << "Part 2: ";
             Day<6>::solve2(in2, std::cout);
+            t.stop();
+            break;
+        case 8:
+            t.start();
+            std::cout << "Part 1: ";
+            Day<8>::solve1(in1, std::cout);
+            std::cout << "Part 2: ";
+            Day<8>::solve2(in2, std::cout);
             t.stop();
             break;
         default:
