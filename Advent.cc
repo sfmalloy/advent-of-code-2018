@@ -14,6 +14,7 @@
 #include "Day05.hpp"
 #include "Day06.hpp"
 #include "Day08.hpp"
+#include "Day11.hpp"
 
 void runSingle(const int& day);
 
@@ -106,6 +107,14 @@ void runSingle(const int& day) {
             Day<8>::solve1(in1, std::cout);
             std::cout << "Part 2: ";
             Day<8>::solve2(in2, std::cout);
+            t.stop();
+            break;
+        case 11:
+            t.start();
+            std::cout << "Part 1: ";
+            Day<11>::solve1(in1, std::cout);
+            std::cout << "Part 2: ";
+            Day<11>::solve2(in2, std::cout);
             t.stop();
             break;
         default:
