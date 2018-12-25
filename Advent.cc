@@ -15,12 +15,13 @@
 #include "Day06.hpp"
 #include "Day08.hpp"
 #include "Day11.hpp"
+#include "Day22.hpp"
 
 void runSingle(const int& day);
 
 void runAll();
 
-const int DAYS_COMPLETED = 7;
+const int DAYS_COMPLETED[] = { 1, 2, 3, 4, 5, 6, 8, 11, 22 };
 
 int main(int argc, char* argv[]) {
     if (argc < 2) {
@@ -37,7 +38,6 @@ int main(int argc, char* argv[]) {
         int day = std::stoi(argv[2]);
         runSingle(day);
     }
-
 
     return EXIT_SUCCESS;
 }
@@ -117,16 +117,24 @@ void runSingle(const int& day) {
             Day<11>::solve2(in2, std::cout);
             t.stop();
             break;
+        case 22:
+            t.start();
+            std::cout << "Part 1: ";
+            Day<22>::solve1(in1, std::cout);
+            std::cout << "Part 2: ";
+            Day<22>::solve2(in2, std::cout);
+            t.stop();
+            break;
         default:
             std::cout << "Day not complete";
     }
 
-    std::cout << "Time: " <<std::fixed << std::setprecision(3) << t.getDurationMs() << " ms" << std::endl;
+    std::cout << "Time: " << std::fixed << std::setprecision(3) << t.getDurationMs() << " ms" << std::endl;
 }
 
 void runAll() {
     std::cout << "All days:\n" << std::endl;
-    for (int i = 1; i <= DAYS_COMPLETED; ++i) {
+    for (const int& i : DAYS_COMPLETED) {
         runSingle(i);
         std::cout << std::endl;
     }
