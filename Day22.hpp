@@ -40,7 +40,7 @@ void Day<22>::solve1(std::ifstream& in, std::ostream& out) {
 
 template<>
 void Day<22>::solve2(std::ifstream& in, std::ostream& out) {
-    out << std::endl;
+    out << "not finished" << std::endl;
 }
 
 long geoIndex(int x, int y, const int& depth) {
