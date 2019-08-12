@@ -1,7 +1,7 @@
 # Advent of Code 2018!!!
 
 These are my solutions to Advent of Code 2018.
-If you want to download for yourself, compile using make and the run.
+If you want to download for yourself, compile using make and then run.
 
 **Running**
 ----------------------------------
