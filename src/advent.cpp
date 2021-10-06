@@ -1,7 +1,8 @@
 #include <iostream>
 #include <stdexcept>
-#include <functional>
+#include <utility>
 #include <iomanip>
+#include <array>
 
 #include "option_parser.hpp"
 #include "timer.hpp"
@@ -14,41 +15,22 @@ time_solve();
 std::string
 file_day_num(unsigned num);
 
-std::function<double()>
-day_functions[25]
-{
-    time_solve<1>,
-    time_solve<2>,
-    time_solve<3>,
-    time_solve<4>,
-    time_solve<5>,
-    time_solve<6>,
-    time_solve<7>,
-    time_solve<8>,
-    time_solve<9>,
-    time_solve<10>,
-    time_solve<11>,
-    time_solve<12>,
-    time_solve<13>,
-    time_solve<14>,
-    time_solve<15>,
-    time_solve<16>,
-    time_solve<17>,
-    time_solve<18>,
-    time_solve<19>,
-    time_solve<20>,
-    time_solve<21>,
-    time_solve<22>,
-    time_solve<23>,
-    time_solve<24>,
-    time_solve<25>
-};
-
 int 
 main(int argc, char* argv[]) 
 {
     try 
     {
+        // Thanks willkill07 for this epic snippet
+        // Creates an array of functions to call on for each day without having to type each one manually
+        using func_type = double(*)();
+        constexpr const size_t DAYS = 25;
+        
+        auto day_functions = [&] <size_t ... Is> (std::index_sequence<Is...>) -> std::array<func_type, DAYS> {
+            std::array<func_type, DAYS> functions;
+            ((functions[Is] = &time_solve<Is + 1>), ...);
+            return functions;
+        }(std::make_index_sequence<DAYS>{});
+
         option_parser parser(argc, argv);
         double runtime = day_functions[parser.get_int("d") - 1]();
         std::cout << std::setprecision(3) << "Time: " << runtime << "ms\n";
