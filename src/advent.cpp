@@ -67,8 +67,9 @@ double
 time_solve()
 {
     std::ifstream input(file_day_num(N));
-    timer t;
     solution<N> curr_day;
+
+    timer t;
     curr_day.solve(input);
     t.stop();
     
