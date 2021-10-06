@@ -25,7 +25,7 @@ OBJS = advent.o option_parser.o timer.o utils.o d01.o d02.o d03.o d04.o d05.o d0
 # C++ compiler flags
 # Use the first for debugging, the second for release
 # CXXFLAGS := -g -Wall -std=c++17 $(INCDIRS)
-CXXFLAGS := -Wall -std=c++17 -I $(INCDIRS)/
+CXXFLAGS := -Wall -I $(INCDIRS)/
 
 # Linker. For C++ should be $(CXX).
 LINK := $(CXX)
