@@ -1,2 +1,4 @@
-Advent
-Advent.o
+advent
+obj/
+*.o
+.vscode/
