@@ -1,13 +1,57 @@
-CXX      = g++
+########################################################
+# Makefile for CSCI 435 
+# Author: Dr. Zoppetti, Sean Malloy
+########################################################
 
-CXXFLAGS = -O3 -Wall
+########################################################
+# Variable definitions
+########################################################
+# C++ compiler
+CXX = g++
+# CXX := clang++
 
-LINK     := $(CXX)
+# Directories
+INCDIRS = include
+SRCDIR = src
+SOLDIR = solutions
+OBJDIR = obj
 
-Advent : Advent.o
-	$(LINK) $(CXXFLAGS) $^ -o $@
+vpath %.cpp $(SRCDIR)/
+vpath %.cpp $(SOLDIR)/
 
-Advent.o : Advent.cc Day.hpp Day01.hpp Day02.hpp Day03.hpp Day04.hpp Day05.hpp Day06.hpp Day08.hpp Day11.hpp Day22.hpp
+# Object files
+OBJS = advent.o option_parser.o timer.o utils.o d01.o d02.o d03.o d04.o d05.o d06.o d07.o d08.o d09.o d10.o d11.o d12.o d13.o d14.o d15.o d16.o d17.o d18.o d19.o d20.o d21.o d22.o d23.o d24.o d25.o
 
-clean :
-	@$(RM) Advent
+# C++ compiler flags
+# Use the first for debugging, the second for release
+# CXXFLAGS := -g -Wall -std=c++17 $(INCDIRS)
+CXXFLAGS := -Wall -std=c++17 -I $(INCDIRS)/
+
+# Linker. For C++ should be $(CXX).
+LINK := $(CXX)
+
+# Executable name. 
+EXEC := advent
+
+#############################################################
+# Rules
+#   Rules have the form
+#   target : prerequisites
+#   	  recipe
+#############################################################
+
+$(EXEC): $(addprefix $(OBJDIR)/, $(OBJS))
+	$(LINK) $(LDFLAGS) $^ -o $@ $(LDLIBS)
+
+$(OBJDIR)/%.o: %.cpp
+	@mkdir -p $(OBJDIR)
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+
+#############################################################
+
+.PHONY: clean
+clean:
+	$(RM) $(EXEC) a.out core
+	$(RM) $(OBJDIR)/*.o *.d *~
+
+#############################################################
