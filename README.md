@@ -42,8 +42,30 @@ The script is designed to only download the input once and then print it. If you
 
 ## Writing Your Own Solutions
 
-The main runner (`advent`) is programmed to grab the input from that directory and feed it into a `std::fstream`. For example, if you wanted to read every line of a text file, you could do
+Each day is broken up into a seperate file, with one function called `solve`. It looks a little different than just a simple `void solve(...)` function however.
 
 ```cpp
-
+template <>
+void
+solution<1>::solve(std::ifstream& input);
 ```
+
+The template is used to make a unique solve function for day 1, without having a seperate function called `solveDay1` or something like that. This is mainly for organization and abstraction in the `advent.cpp` source file. To change the day number, simply change the number in the template to any number from 1 to 25 (inclusive).
+
+The main runner (`advent.cpp`) is programmed to grab the input from that directory and feed it into a `std::fstream`. For example, if you wanted to read every line of a text file as an int, into a `std::vector`, you could do this:
+
+```cpp
+template <>
+void
+solution<1>::solve(std::ifstream& input)
+{
+    std::vector<int> nums;
+    int curr_num;
+    while (input >> curr_num) 
+        nums.push_back(curr_num);
+}
+```
+
+The main goal of this "library" was to take the headache out of reading inputs and timing, and handle all of that in the background so you can focus purely on the solution to the problem.
+
+Ok that's it! If you have any questions about this feel free to reach out!
