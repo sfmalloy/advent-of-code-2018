@@ -24,6 +24,6 @@ timer::stop()
 double
 timer::get_duration_ms()
 {
-    std::chrono::duration<double> diff = m_stop - m_start;
+    std::chrono::duration<double, std::milli> diff = m_stop - m_start;
     return diff.count();
 }

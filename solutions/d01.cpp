@@ -1,15 +1,36 @@
 #include <iostream>
+#include <vector>
+#include <unordered_map>
+#include <algorithm>
 
 #include "solution.hpp"
-#include "utils.hpp"
 
 template <>
 void
-solution<1>::solve()
+solution<1>::solve(std::ifstream& input)
 {
-    std::string need_to_split = "this, is, a, test";
-    auto split_str = split(need_to_split, " ");
-    for (const auto& s : split_str) {
-        std::cout << s << '\n';
+    std::vector<int> nums;
+
+    int n;
+    int sum = 0;
+    while (input >> n) 
+    {
+        sum += n;
+        nums.push_back(n);
     }
+
+    std::cout << sum << '\n';
+
+    std::unordered_map<int, int> seen;
+    size_t idx = 0;
+    sum = 0;
+    while (seen[sum] < 2) 
+    {
+        sum += nums[idx++];
+        seen[sum] += 1;
+        if (idx == nums.size())
+            idx = 0;
+    }
+
+    std::cout << sum << '\n';
 }
