@@ -1,8 +1,10 @@
 #pragma once
 
-template <int N>
+#include <fstream>
+
+template <unsigned N>
 class solution
 {
 public:
-    void solve();
+    void solve(std::ifstream& input);
 };

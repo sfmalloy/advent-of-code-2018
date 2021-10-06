@@ -1,14 +1,18 @@
 #include <iostream>
 #include <stdexcept>
 #include <functional>
+#include <iomanip>
 
 #include "option_parser.hpp"
 #include "timer.hpp"
 #include "solution.hpp"
 
-template <int N>
+template <unsigned N>
 double
 time_solve();
+
+std::string
+file_day_num(unsigned num);
 
 std::function<double()>
 day_functions[25]
@@ -46,36 +50,38 @@ main(int argc, char* argv[])
     try 
     {
         option_parser parser(argc, argv);
-        std::cout << parser.get_str("d") << '\n';
-
-        timer t;
-        for (unsigned i = 0; i < 10000000; ++i)
-        {
-            int x = 1;
-            int y = 2;
-            int z = x + y;
-        }
-        t.stop();
-        
-        std::cout << t.get_duration_ms() << '\n';
-        day_functions[parser.get_int("d") - 1]();
-    } 
+        double runtime = day_functions[parser.get_int("d") - 1]();
+        std::cout << std::setprecision(3) << "Time: " << runtime << "ms\n";
+    }
     catch (const std::exception& e) 
     {
         std::cout << e.what() << '\n';
+        return -1;
     }
 
     return 0;
 }
 
-template <int N>
+template <unsigned N>
 double
 time_solve()
 {
+    std::ifstream input(file_day_num(N));
     timer t;
     solution<N> curr_day;
-    curr_day.solve();
+    curr_day.solve(input);
     t.stop();
     
     return t.get_duration_ms();
+}
+
+std::string
+file_day_num(unsigned num)
+{
+    std::string name = "inputs/d";
+    if (num < 10)
+        name += "0" + std::to_string(num);
+    else
+        name += std::to_string(num);
+    return name + ".in";
 }

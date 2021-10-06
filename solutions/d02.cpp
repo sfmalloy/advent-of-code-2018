@@ -4,7 +4,7 @@
 
 template <>
 void
-solution<2>::solve()
+solution<2>::solve(std::ifstream& input)
 {
     std::cout << "Solution to day 2" << '\n';
 }
