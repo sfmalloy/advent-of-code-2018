@@ -1,13 +1,13 @@
 ########################################################
-# Makefile for CSCI 435 
-# Author: Dr. Zoppetti, Sean Malloy
+# Makefile for Advent of Code 
+# Author: Sean Malloy
 ########################################################
 
 ########################################################
 # Variable definitions
 ########################################################
 # C++ compiler
-# CXX = g++-11
+# CXX = g++
 CXX := clang++
 
 # Directories
@@ -24,8 +24,8 @@ OBJS = advent.o option_parser.o timer.o utils.o d01.o d02.o d03.o d04.o d05.o d0
 
 # C++ compiler flags
 # Use the first for debugging, the second for release
-# CXXFLAGS := -g -Wall -std=c++17 $(INCDIRS)
-CXXFLAGS := -Wall -std=c++20 -I $(INCDIRS)/
+# CXXFLAGS := -g -Wall -std=c++20 $(INCDIRS)
+CXXFLAGS := -Wall -O3 -std=c++20 -I $(INCDIRS)/
 
 # Linker. For C++ should be $(CXX).
 LINK := $(CXX)

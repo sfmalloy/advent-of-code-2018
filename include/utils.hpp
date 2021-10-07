@@ -4,7 +4,7 @@
 #include <vector>
 
 std::vector<std::string>
-split(const std::string& str, const std::string& delim = " ");
+split(const std::string& str, const std::string& delim);
 
 void
 strip(std::string& str);
