@@ -37,4 +37,19 @@ solution<2>::solve(std::ifstream& input)
     }
 
     std::cout << twos * threes << '\n';
+    std::unordered_map<std::string, unsigned> id_counts;
+    for (size_t i = 0; i < ids[0].size(); ++i)
+    {
+        for (const auto& id : ids)
+            id_counts[id.substr(0, i) + id.substr(i + 1, id.length() - i + 1)] += 1;
+        for (const auto& [id, count] : id_counts)
+        {
+            if (count == 2)
+            {
+                std::cout << id << '\n';
+                return;
+            }
+        }
+        id_counts.clear();
+    }
 }
