@@ -20,19 +20,26 @@ main(int argc, char* argv[])
 {
     try 
     {
+        constexpr const size_t DAYS = 25;
+
+        option_parser parser(argc, argv);
+        int day = parser.get_int("d") - 1;
+        if (day >= DAYS || day < 0) 
+        {
+            std::cerr << "Invalid day number\n";
+            return -1;
+        }
+        
         // Thanks willkill07 for this epic snippet
         // Creates an array of functions to call on for each day without having to type each one manually
         using func_type = double(*)();
-        constexpr const size_t DAYS = 25;
-        
         auto day_functions = [&] <size_t ... Is> (std::index_sequence<Is...>) -> std::array<func_type, DAYS> {
             std::array<func_type, DAYS> functions;
             ((functions[Is] = &time_solve<Is + 1>), ...);
             return functions;
         }(std::make_index_sequence<DAYS>{});
 
-        option_parser parser(argc, argv);
-        double runtime = day_functions[parser.get_int("d") - 1]();
+        double runtime = day_functions[day]();
         std::cout << std::setprecision(3) << "Time: " << runtime << "ms\n";
     }
     catch (const std::exception& e) 
