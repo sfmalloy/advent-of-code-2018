@@ -9,8 +9,8 @@
 #include "solution.hpp"
 
 template <unsigned N>
-double
-time_solve();
+float
+time_solve(std::string filename);
 
 std::string
 file_day_num(unsigned num);
@@ -18,7 +18,7 @@ file_day_num(unsigned num);
 int 
 main(int argc, char* argv[]) 
 {
-    try 
+    try
     {
         constexpr const size_t DAYS = 25;
 
@@ -29,18 +29,22 @@ main(int argc, char* argv[])
             std::cerr << "Invalid day number\n";
             return -1;
         }
+
+        std::string filename = "";
+        if (parser.get_str("f") != STR_NOT_FOUND)
+            filename = parser.get_str("f");
         
         // Thanks willkill07 for this epic snippet
         // Creates an array of functions to call on for each day without having to type each one manually
-        using func_type = double(*)();
-        auto day_functions = [&] <size_t ... Is> (std::index_sequence<Is...>) -> std::array<func_type, DAYS> {
+        using func_type = float(*)(std::string);
+        auto day_functions = [&] <size_t... Is> (std::index_sequence<Is...>) -> std::array<func_type, DAYS> {
             std::array<func_type, DAYS> functions;
             ((functions[Is] = &time_solve<Is + 1>), ...);
             return functions;
         }(std::make_index_sequence<DAYS>{});
 
-        double runtime = day_functions[day]();
-        std::cout << std::setprecision(3) << "Time: " << runtime << "ms\n";
+        float runtime = day_functions[day](filename);
+        std::cout << std::setprecision(3) << std::fixed <<  "Time: " << runtime << "ms\n";
     }
     catch (const std::exception& e) 
     {
@@ -52,10 +56,12 @@ main(int argc, char* argv[])
 }
 
 template <unsigned N>
-double
-time_solve()
+float
+time_solve(std::string filename)
 {
-    std::ifstream input(file_day_num(N));
+    if (filename == "")
+        filename = file_day_num(N);
+    std::ifstream input(filename);
     solution<N> curr_day;
 
     timer t;

@@ -22,7 +22,7 @@ option_parser::get_str(const std::string& arg_name)
 {
     if (m_args.find(arg_name) != std::end(m_args))
         return m_args.at(arg_name);
-    throw std::runtime_error("Argument \"" + arg_name + "\" not found");        
+    return STR_NOT_FOUND;
 }
 
 int
@@ -30,5 +30,5 @@ option_parser::get_int(const std::string& arg_name)
 {
     if (m_args.find(arg_name) != std::end(m_args))
         return std::stoi(m_args.at(arg_name));
-    throw std::runtime_error("Argument \"" + arg_name + "\" not found");
+    return INT_NOT_FOUND;
 }

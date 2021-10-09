@@ -3,21 +3,21 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <array>
 
 std::vector<std::string>
-split(const std::string& str, const std::string& delim)
+split(std::string_view str, const std::string& delim)
 {
     std::vector<std::string> split_str;
 
     size_t idx = 0;
     while (idx != std::string::npos && idx < str.length() - 1)
     {
-        size_t next = str.find(delim, idx + 1);
-        if (next == std::string::npos)
+        size_t next = str.find(delim, idx);
+        if (next == std::string_view::npos)
             next = str.length();
-        split_str.push_back(str.substr(idx, next - idx));
+        split_str.push_back(std::string(str.substr(idx, next - idx)));
         idx = next + delim.size();
-        std::cout << idx << '\n';
     }
 
     return split_str;

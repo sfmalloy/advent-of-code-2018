@@ -15,7 +15,7 @@ public:
     void stop();
 
     // Return the duration from start to stop in milliseconds
-    double get_duration_ms();
+    float get_duration_ms();
 
 private:
     using clock = std::chrono::high_resolution_clock;
