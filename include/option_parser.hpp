@@ -3,6 +3,10 @@
 #include <vector>
 #include <string>
 #include <unordered_map>
+#include <cstdint>
+
+const int INT_NOT_FOUND = INT32_MIN;
+const std::string STR_NOT_FOUND = "";
 
 class option_parser 
 {
@@ -27,4 +31,5 @@ public:
 private:
     std::vector<char*> m_raw_args;
     std::unordered_map<std::string, std::string> m_args;
+
 };
