@@ -13,7 +13,7 @@ struct Point
     bool
     operator==(const Point& other) const
     {
-        return this->x == other.x && this->y == other.y;
+        return x == other.x && y == other.y;
     }
 };
 
