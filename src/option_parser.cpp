@@ -1,6 +1,6 @@
-#include "option_parser.hpp"
-#include <stdexcept>
 #include <iostream>
+
+#include "option_parser.hpp"
 
 option_parser::option_parser(int argc, char* argv[])
     : m_raw_args(argv + 1, argv + argc),

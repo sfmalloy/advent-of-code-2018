@@ -8,12 +8,12 @@
 #include "timer.hpp"
 #include "solution.hpp"
 
-template <unsigned N>
+template <u32 N>
 float
 time_solve(std::string filename);
 
 std::string
-file_day_num(unsigned num);
+file_day_num(u32 num);
 
 int 
 main(int argc, char* argv[]) 
@@ -55,7 +55,7 @@ main(int argc, char* argv[])
     return 0;
 }
 
-template <unsigned N>
+template <u32 N>
 float
 time_solve(std::string filename)
 {
@@ -72,7 +72,7 @@ time_solve(std::string filename)
 }
 
 std::string
-file_day_num(unsigned num)
+file_day_num(u32 num)
 {
     std::string name = "inputs/d";
     if (num < 10)

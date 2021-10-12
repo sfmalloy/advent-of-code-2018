@@ -31,5 +31,4 @@ public:
 private:
     std::vector<char*> m_raw_args;
     std::unordered_map<std::string, std::string> m_args;
-
 };

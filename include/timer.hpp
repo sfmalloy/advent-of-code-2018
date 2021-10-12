@@ -9,13 +9,16 @@ public:
     timer();
 
     // Set the start time
-    void start();
+    void
+    start();
 
     // Set the stop time
-    void stop();
+    void
+    stop();
 
     // Return the duration from start to stop in milliseconds
-    float get_duration_ms();
+    float
+    get_duration_ms();
 
 private:
     using clock = std::chrono::high_resolution_clock;
