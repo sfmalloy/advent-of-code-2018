@@ -105,7 +105,6 @@ template <>
 void
 solution<4>::solve(std::ifstream& input)
 {
-    // std::unordered_map<u32, std::vector<timestamp>> guard_states;
     std::vector<timestamp> state_list;
 
     std::string line;
