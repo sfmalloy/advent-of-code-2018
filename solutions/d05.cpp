@@ -45,7 +45,6 @@ public:
         if (to_remove == nullptr)
             return;
         pos->next = to_remove->next;
-        to_remove->next = nullptr;
 
         delete to_remove;
         --m_size;
@@ -78,19 +77,6 @@ private:
 
     u32 m_size;
 };
-
-std::ostream&
-operator<<(std::ostream& out, const char_list& lst)
-{
-    node* curr = lst.begin();
-    for (u32 i = 0; i < lst.size(); ++i)
-    {
-        out << curr->value;
-        curr = curr->next;
-    }
-
-    return out;
-}
 
 void
 trim(char_list& pair_polymers)
