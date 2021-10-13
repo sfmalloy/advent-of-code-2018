@@ -97,7 +97,8 @@ trim(char_list& pair_polymers)
     while (true)
     {
         bool found = false;
-        while (pair_polymers.begin()->value != pair_polymers.begin()->next->value && tolower(pair_polymers.begin()->value) == tolower(pair_polymers.begin()->next->value))
+        while (pair_polymers.begin()->value != pair_polymers.begin()->next->value 
+               && tolower(pair_polymers.begin()->value) == tolower(pair_polymers.begin()->next->value))
         {
             pair_polymers.pop_front();
             pair_polymers.pop_front();
@@ -107,7 +108,8 @@ trim(char_list& pair_polymers)
         node* curr = pair_polymers.begin();
         while (curr->next != nullptr && curr->next->next != nullptr)
         {
-            if (curr->next->value != curr->next->next->value && tolower(curr->next->value) == tolower(curr->next->next->value))
+            if (curr->next->value != curr->next->next->value 
+                && tolower(curr->next->value) == tolower(curr->next->next->value))
             {
                 pair_polymers.remove_after(curr);
                 pair_polymers.remove_after(curr);
