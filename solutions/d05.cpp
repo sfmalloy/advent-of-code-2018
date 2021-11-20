@@ -111,7 +111,7 @@ trim(char_list& pair_polymers)
     }
 }
 
-template <>
+template<>
 void
 solution<5>::solve(std::ifstream& input)
 {

@@ -101,7 +101,7 @@ operator<<(std::ostream& out, const timestamp& t)
     return out;
 }
 
-template <>
+template<>
 void
 solution<4>::solve(std::ifstream& input)
 {
