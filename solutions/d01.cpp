@@ -5,7 +5,7 @@
 
 #include "solution.hpp"
 
-template <>
+template<>
 void
 solution<1>::solve(std::ifstream& input)
 {
