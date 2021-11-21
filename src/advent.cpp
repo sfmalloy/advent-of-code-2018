@@ -18,8 +18,7 @@ file_day_num(u32 num);
 int 
 main(int argc, char* argv[]) 
 {
-    try
-    {
+
         constexpr const size_t DAYS = 25;
 
         option_parser parser(argc, argv);
@@ -45,13 +44,8 @@ main(int argc, char* argv[])
 
         float runtime = day_functions[day](filename);
         std::cout << std::setprecision(3) << std::fixed <<  "Time: " << runtime << "ms\n";
-    }
-    catch (const std::exception& e) 
-    {
-        std::cout << e.what() << '\n';
-        return -1;
-    }
-
+ 
+    
     return 0;
 }
 
