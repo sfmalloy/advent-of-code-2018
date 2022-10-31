@@ -11,7 +11,7 @@ split(std::string_view str, const std::string& delim)
     std::vector<std::string> split_str;
 
     size_t idx = 0;
-    while (idx != std::string::npos && idx < str.length() - 1)
+    while (idx != std::string::npos && idx < str.length())
     {
         size_t next = str.find(delim, idx);
         if (next == std::string_view::npos)
@@ -30,4 +30,12 @@ strip(std::string& str)
     while (str[idx] == '\n' || str[idx] == '\r')
         --idx;
     str = str.substr(0, idx + 1);
+}
+
+std::string
+readline(std::ifstream& input)
+{
+    std::string line;
+    std::getline(input, line);
+    return line;
 }
