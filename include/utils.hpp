@@ -7,6 +7,8 @@
 #include <array>
 #include <stdexcept>
 
+#include "solution.hpp"
+
 /*****************************************************************************/
 // Non-templated functions
 
@@ -19,7 +21,7 @@ strip(std::string& str);
 /*****************************************************************************/
 // Templated functions
 
-template <size_t N>
+template<size_t N>
 std::array<std::string, N>
 fixed_split(std::string_view str, const std::string& delim)
 {
@@ -38,7 +40,7 @@ fixed_split(std::string_view str, const std::string& delim)
     return split_str;
 }
 
-template <typename T, size_t N>
+template<typename T, size_t N>
 std::array<T, N>
 map_type(std::array<std::string, N> arr)
 {
@@ -46,19 +48,17 @@ map_type(std::array<std::string, N> arr)
 
     for (size_t i = 0; i < N; ++i)
     {
-        if (std::is_same<T, int>())
+        if (std::is_same<T, i32>())
             new_arr[i] = std::stoi(arr[i]);
-        else if (std::is_same<T, long>())
+        else if (std::is_same<T, i64>())
             new_arr[i] = std::stol(arr[i]);
-        else if (std::is_same<T, unsigned long>())
+        else if (std::is_same<T, u64>() || std::is_same<T, u32>())
             new_arr[i] = std::stoul(arr[i]);
-        else if (std::is_same<T, unsigned long long>())
-            new_arr[i] = std::stoull(arr[i]);
-        else if (std::is_same<T, float>())
+        else if (std::is_same<T, f32>())
             new_arr[i] = std::stof(arr[i]);
-        else if (std::is_same<T, double>())
+        else if (std::is_same<T, f64>())
             new_arr[i] = std::stod(arr[i]);
-        else if (std::is_same<T, long double>())
+        else if (std::is_same<T, f128>())
             new_arr[i] = std::stold(arr[i]);
         else
             throw std::runtime_error("Invalid type conversion");
@@ -67,17 +67,27 @@ map_type(std::array<std::string, N> arr)
     return new_arr;
 }
 
-template <typename T, size_t N>
+template<typename T, size_t N>
 std::array<T, N>
 type_split(std::string_view str, const std::string& delim)
 {
     return map_type<T>(fixed_split<N>(str, delim));
 }
 
-template <typename T>
+template<typename T>
 void
 print_vector(const std::vector<T>& v)
 {
+    std::cout << "[ ";
     for (size_t i = 0; i < v.size(); ++i)
-        std::cout << v[i] << '\n';
+        std::cout << v[i] << (i < v.size() - 1 ? ", " : "");
+    std::cout << " ]";
+}
+
+template <typename T, size_t N>
+void
+print_array(const std::array<T, N>& arr) 
+{
+    for (const auto& elem : arr)
+        std::cout << elem << '\n';
 }

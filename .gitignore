@@ -2,3 +2,6 @@ advent
 obj/
 *.o
 .vscode/
+.cache
+test.in
+compile_commands.json
