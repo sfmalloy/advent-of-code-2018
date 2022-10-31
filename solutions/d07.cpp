@@ -14,10 +14,10 @@ using path_map = std::unordered_map<char, std::unordered_set<char>>;
 
 struct worker
 {
-    int time;
+    i32 time;
     char step;
 
-    worker(int t=0, char s=0)
+    worker(i32 t=0, char s=0)
         : time(t),
           step(s)
     { }
@@ -80,7 +80,7 @@ solution<7>::solve(std::ifstream& input)
     while (working)
     {
         working = false;
-        for (int i = 0; i < num_workers; ++i)
+        for (i32 i = 0; i < num_workers; ++i)
         {
             if (workers[i].step == 0)
             {
@@ -96,7 +96,7 @@ solution<7>::solve(std::ifstream& input)
             }
         }
 
-        for (int i = 0; i < num_workers; ++i)
+        for (i32 i = 0; i < num_workers; ++i)
         {
             if (workers[i].time > 0)
             {
