@@ -3,6 +3,7 @@
 #include <vector>
 #include <numeric>
 #include <tuple>
+#include <algorithm>
 
 #include "solution.hpp"
 #include "utils.hpp"
