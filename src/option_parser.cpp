@@ -13,21 +13,32 @@ option_parser::option_parser(int argc, char* argv[])
         std::string arg_name(m_raw_args[i]);
         if (arg_name[0] == '-')
             arg_name = arg_name.substr(1);
-        if (i + 1 == argc - 1)
+        if (i + 1 != argc - 1)
         {
-            std::cerr << "Missing argument for flag -" << arg_name << '\n';
-            exit(-1);
+            if (m_raw_args[i + 1][0] != '-')
+                m_args[arg_name] = std::string(m_raw_args[i + 1]);
+            else
+                m_args[arg_name] = "";
         }
-        m_args[arg_name] = std::string(m_raw_args[i + 1]);
+        else
+        {
+            m_args[arg_name] = "";
+        }
     }
 }
 
 option_parser::~option_parser() { }
 
+bool
+option_parser::has(const std::string& arg_name)
+{
+    return m_args.find(arg_name) != std::end(m_args);
+}
+
 std::string 
 option_parser::get_str(const std::string& arg_name)
 {
-    if (m_args.find(arg_name) != std::end(m_args))
+    if (has(arg_name))
         return m_args.at(arg_name);
     return STR_NOT_FOUND;
 }
@@ -35,7 +46,7 @@ option_parser::get_str(const std::string& arg_name)
 int
 option_parser::get_int(const std::string& arg_name)
 {
-    if (m_args.find(arg_name) != std::end(m_args))
+    if (has(arg_name))
     {
         try 
         {
