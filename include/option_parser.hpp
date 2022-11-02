@@ -28,6 +28,9 @@ public:
     int
     get_int(const std::string& arg_name);
 
+    bool
+    has(const std::string& arg_name);
+
 private:
     std::vector<char*> m_raw_args;
     std::unordered_map<std::string, std::string> m_args;

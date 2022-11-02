@@ -1,3 +1,4 @@
+#include <ios>
 #include <iostream>
 #include <stdexcept>
 #include <utility>
@@ -19,19 +20,6 @@ int
 main(int argc, char* argv[]) 
 {
     constexpr const size_t DAYS = 25;
-
-    option_parser parser(argc, argv);
-    i32 day = parser.get_int("d") - 1;
-    if (day >= DAYS || day < 0) 
-    {
-        std::cerr << "Invalid day number\n";
-        return -1;
-    }
-
-    std::string filename = "";
-    if (parser.get_str("f") != STR_NOT_FOUND)
-        filename = parser.get_str("f");
-    
     using func_type = f32(*)(std::string);
     std::array<func_type, DAYS> day_functions = [&]<size_t... Is>(std::index_sequence<Is...>)
     {
@@ -40,8 +28,46 @@ main(int argc, char* argv[])
         return functions;
     }(std::make_index_sequence<DAYS>{});
 
-    f32 runtime = day_functions[day](filename);
-    std::cout << std::setprecision(3) << std::fixed <<  "Time: " << runtime << "ms\n";
+    option_parser parser(argc, argv);
+    auto all_days = parser.has("a");
+    if (all_days)
+    {
+        f32 total = 0;
+        // disable printing output for timing all days
+        std::cout.setstate(std::ios_base::failbit);
+        std::array<f32, DAYS> times;
+        for (i32 d = 0; d < DAYS; ++d)
+        {
+            times[d] = day_functions[d]("");
+            total += (times[d] < 1 ? 0 : times[d]);
+        }
+
+        std::cout.clear();
+        std::cout << " Day " << " | " << "    Time " << '\n';
+        std::cout << "------+-------------" << '\n';
+        for (i32 d = 0; d < DAYS; ++d)
+        {
+            std::cout << std::fixed << std::setw(5) << d + 1 << " | " << std::setprecision(3) << std::setw(8) << std::right << (times[d] < 1 ? 0 : times[d]) << " ms\n";
+        }
+        std::cout << "------+-------------" << '\n';
+        std::cout << "Total" << " | " << total << '\n';
+    }
+    else
+    {
+        i32 day = parser.get_int("d") - 1;
+        if (day >= DAYS || day < 0) 
+        {
+            std::cerr << "Invalid day number\n";
+            return -1;
+        }
+
+        std::string filename = "";
+        if (parser.get_str("f") != STR_NOT_FOUND)
+            filename = parser.get_str("f");
+
+        f32 runtime = day_functions[day](filename);
+        std::cout << std::setprecision(3) << std::fixed <<  "Time: " << runtime << "ms\n";
+    }
  
     return 0;
 }
