@@ -16,7 +16,7 @@ struct square
 square
 region_sum(i32 size, std::vector<std::vector<i32>> cells)
 {
-    std::vector<std::vector<i32>> col_sums(cells.size() - size, std::vector<i32>(cells[0].size()));
+    std::vector<std::vector<i32>> col_sums(cells.size(), std::vector<i32>(cells[0].size()));
     for (i32 r = 0; r < col_sums.size(); ++r)
     {
         i32 curr_sum = 0;
@@ -30,10 +30,8 @@ region_sum(i32 size, std::vector<std::vector<i32>> cells)
         }
     }
 
-    i32 max = 0;
-    i32 max_x = 0;
-    i32 max_y = 0;
-    for (i32 c = 0; c < col_sums.size(); ++c)
+    square s{};
+    for (i32 c = 0; c < col_sums[0].size(); ++c)
     {
         i32 rsum = 0;
         for (i32 r = 0; r < size - 1; ++r)
@@ -41,17 +39,19 @@ region_sum(i32 size, std::vector<std::vector<i32>> cells)
         for (i32 r = size - 1; r < col_sums.size() - size; ++r)
         {
             rsum += col_sums[r][c];
-            if (rsum > max)
+            if (rsum > s.sum)
             {
-                max = rsum;
-                max_x = c + 1;
-                max_y = r + 1;
+                s.sum = rsum;
+                s.x = c + 1;
+                s.y = r + 1;
             }
             rsum -= col_sums[r - (size - 1)][c];
         }
     }
 
-    return {max_x, max_y - (size - 1), max, size};
+    s.y -= size - 1;
+    s.size = size;
+    return s;
 }
 
 template<>
@@ -77,11 +77,11 @@ solution<11>::solve(std::ifstream& input)
     std::cout << part1.x << ',' << part1.y << '\n';
 
     square max{0,0,0,0};
-    for (i32 i = 1; i <= cells.size() / 2; ++i) {
+    for (i32 i = 1; i < cells.size(); ++i) 
+    {
         auto s = region_sum(i, cells);
-        if (max.sum < s.sum) {
+        if (max.sum < s.sum)
             max = s;
-        }
     }
     std::cout << max.x << ',' << max.y << ',' << max.size << '\n';
 }
