@@ -47,10 +47,10 @@ main(int argc, char* argv[])
         std::cout << "------+-------------" << '\n';
         for (i32 d = 0; d < DAYS; ++d)
         {
-            std::cout << std::fixed << std::setw(5) << d + 1 << " | " << std::setprecision(3) << std::setw(8) << std::right << (times[d] < 1 ? 0 : times[d]) << " ms\n";
+            std::cout << std::fixed << std::setw(5) << d + 1 << " | " << std::setprecision(3) << std::setw(8) << std::right << (times[d] < 0.001f ? 0 : times[d]) << " ms\n";
         }
         std::cout << "------+-------------" << '\n';
-        std::cout << "Total" << " | " << total << '\n';
+        std::cout << "Total" << " | " << total << " ms\n";
     }
     else
     {
