@@ -80,7 +80,7 @@ void
 solution<8>::solve(std::ifstream& input)
 {
     g_idx = 0;
-    auto vec = type_split<u32>(readline(input), " ");
+    auto vec = type_split<u32>(readline(input));
     node* root = tree(vec);
     std::cout << metasum(root) << '\n';
     std::cout << value(root) << '\n';

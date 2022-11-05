@@ -15,7 +15,7 @@
 // Non-templated functions
 
 std::vector<std::string>
-split(std::string_view str, const std::string& delim);
+split(std::string_view str, const std::string& delim = " ");
 
 void
 strip(std::string& str);
@@ -28,7 +28,7 @@ readline(std::ifstream& input);
 
 template<size_t N>
 std::array<std::string, N>
-fixed_split(std::string_view str, const std::string& delim)
+fixed_split(std::string_view str, const std::string& delim = " ")
 {
     std::array<std::string, N> split_str;
 
@@ -75,7 +75,7 @@ map_type(ReadIt begin, ReadIt end, WriteIt write)
 
 template<typename T, size_t N>
 std::array<T, N>
-type_split(std::string_view str, const std::string& delim)
+type_split(std::string_view str, const std::string& delim = " ")
 {
     auto split_arr = fixed_split<N>(str, delim);
     std::array<T, N> new_arr;
@@ -85,7 +85,7 @@ type_split(std::string_view str, const std::string& delim)
 
 template<typename T>
 std::vector<T>
-type_split(std::string_view str, const std::string& delim)
+type_split(std::string_view str, const std::string& delim = " ")
 {
     auto split_vec = split(str, delim);
     std::vector<T> vec(split_vec.size());
