@@ -1,42 +1,18 @@
 #include <iostream>
 #include <string>
 #include <unordered_map>
+#include <vector>
 
 #include "solution.hpp"
 #include "utils.hpp"
 
-struct Point
-{
-    int x;
-    int y;
-
-    bool
-    operator==(const Point& other) const
-    {
-        return x == other.x && y == other.y;
-    }
-};
-
 struct Rect
 {
-    int x;
-    int y;
-    int w;
-    int h;
+    i32 x;
+    i32 y;
+    i32 w;
+    i32 h;
 };
-
-namespace std
-{
-    template<> 
-    struct hash<Point>
-    {
-        size_t operator()(const Point& r) const noexcept
-        {
-            return std::hash<int>{}(r.x)
-                ^ (std::hash<int>{}(r.y) << 1);
-        }
-    };
-}
 
 template<>
 void
@@ -45,7 +21,7 @@ solution<3>::solve(std::ifstream& input)
     std::string test;
 
     std::vector<Rect> areas;
-    std::unordered_map<Point, int> points;
+    std::vector<std::vector<i32>> points(1000, std::vector<i32>(1000));
 
     while (std::getline(input, test))
     {
@@ -54,18 +30,18 @@ solution<3>::solve(std::ifstream& input)
         auto [x_str, y_str] = fixed_split<2>(coords, ",");
         auto [w_str, h_str] = fixed_split<2>(area, "x");
 
-        areas.push_back(Rect{std::stoi(x_str), std::stoi(y_str), std::stoi(w_str), std::stoi(h_str)});
-        for (int y = areas.back().y; y < areas.back().y + areas.back().h; ++y) 
-            for (int x = areas.back().x; x < areas.back().x + areas.back().w; ++x)
-                ++points[Point{x,y}];
+        areas.push_back(Rect{convert<i32>(x_str), convert<i32>(y_str), convert<i32>(w_str), convert<i32>(h_str)});
+        for (i32 y = areas.back().y; y < areas.back().y + areas.back().h; ++y) 
+            for (i32 x = areas.back().x; x < areas.back().x + areas.back().w; ++x)
+                ++points[y][x];
     }
 
-    unsigned total = 0;
+    u32 total = 0;
+    for (u32 i = 0; i < points.size(); ++i)
+        for (u32 j = 0; j < points.size(); ++j)
+            if (points[i][j] > 1)
+                ++total;
 
-    for (const auto& [pt, count] : points)
-        if (count > 1)
-            total += 1;
-    
     std::cout << total << '\n';
 
     for (size_t r = 0; r < areas.size(); ++r)
@@ -73,7 +49,7 @@ solution<3>::solve(std::ifstream& input)
         bool found = true;
         for (int y = areas[r].y; found && y < areas[r].y + areas[r].h; ++y) 
             for (int x = areas[r].x; found && x < areas[r].x + areas[r].w; ++x)
-                if (points.at(Point{x, y}) > 1)
+                if (points[y][x] > 1)
                     found = false;
         if (found)
         {

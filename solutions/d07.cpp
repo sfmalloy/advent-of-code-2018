@@ -64,7 +64,7 @@ solution<7>::solve(std::ifstream& input)
     std::string line;
     while (std::getline(input, line)) 
     {
-        auto split_line = split(line, " ");
+        auto split_line = split(line);
         prereqs[split_line[1][0]].insert(split_line[7][0]);
         sources[split_line[7][0]].insert(split_line[1][0]);
     }

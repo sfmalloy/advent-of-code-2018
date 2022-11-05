@@ -112,7 +112,7 @@ solution<4>::solve(std::ifstream& input)
     while (std::getline(input, line))
     {
         auto [time_str, status] = fixed_split<2>(line, "] ");
-        auto [date, time] = fixed_split<2>(time_str.substr(1), " ");
+        auto [date, time] = fixed_split<2>(time_str.substr(1));
         auto [year, month, day] = type_split<u32, 3>(date, "-");
         auto [hour, minute] = type_split<u32, 2>(time, ":");
 

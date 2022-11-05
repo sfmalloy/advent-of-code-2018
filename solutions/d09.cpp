@@ -112,8 +112,8 @@ void
 solution<9>::solve(std::ifstream& input)
 {
     auto [player_str, points_str] = fixed_split<2>(readline(input), "; ");
-    u32 player_count = convert<u32>(split(player_str, " ")[0]);
-    u32 max_points = convert<u32>(split(points_str, " ")[4]);
+    u32 player_count = convert<u32>(split(player_str)[0]);
+    u32 max_points = convert<u32>(split(points_str)[4]);
     std::cout << play(player_count, max_points) << '\n';
     std::cout << play(player_count, max_points * 100) << '\n';
 }
