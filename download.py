@@ -17,7 +17,7 @@ def create_file(filename, data):
 def day_num_file(n):
     if int(n) < 10:
         return f'0{n}'
-    return '{n}'
+    return f'{n}'
 
 def main():
     parser = OptionParser()
