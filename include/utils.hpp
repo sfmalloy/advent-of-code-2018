@@ -3,6 +3,7 @@
 #include <fstream>
 #include <iostream>
 #include <iterator>
+#include <ostream>
 #include <string>
 #include <string_view>
 #include <vector>
@@ -93,20 +94,12 @@ type_split(std::string_view str, const std::string& delim = " ")
     return vec;
 }
 
-template<typename T>
-void
-print_vector(const std::vector<T>& v)
+template<class Iter>
+void 
+print_collection(Iter begin, Iter end)
 {
     std::cout << "[ ";
-    for (size_t i = 0; i < v.size(); ++i)
-        std::cout << v[i] << (i < v.size() - 1 ? ", " : "");
-    std::cout << " ]";
-}
-
-template<typename T, size_t N>
-void
-print_array(const std::array<T, N>& arr) 
-{
-    for (const auto& elem : arr)
-        std::cout << elem << '\n';
+    for (auto it = begin; it != end; ++it)
+        std::cout << *it << (it + 1 == end ? "" : ", ");
+    std::cout << " ]\n";
 }
