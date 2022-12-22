@@ -151,7 +151,6 @@ addi(i32 a, i32 b, i32 c)
     reg[c] = reg[a] + b;
 }
 
-
 inline void
 mulr(i32 a, i32 b, i32 c)
 {
