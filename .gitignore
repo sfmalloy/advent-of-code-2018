@@ -5,3 +5,4 @@ obj/
 .cache
 test.in
 compile_commands.json
+inputs/
