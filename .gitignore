@@ -6,3 +6,4 @@ obj/
 test.in
 compile_commands.json
 inputs/
+.pyconfig

@@ -1,6 +1,5 @@
 #include <ios>
 #include <iostream>
-#include <stdexcept>
 #include <utility>
 #include <iomanip>
 #include <array>

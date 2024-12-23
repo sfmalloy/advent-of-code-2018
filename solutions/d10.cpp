@@ -36,7 +36,6 @@ struct star
 bool
 step(std::vector<star>& stars)
 {
-    i32 tiny_dist = 0;
     for (auto& s : stars)
         s.move();
     for (u32 i = 0; i < stars.size(); ++i)
@@ -51,7 +50,6 @@ step(std::vector<star>& stars)
                 if (dy + dx <= 2)
                 {
                     found = true;
-                    ++tiny_dist;
                     break;
                 }
             }

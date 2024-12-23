@@ -1,7 +1,6 @@
 #include <iostream>
 #include <vector>
 #include <map>
-#include <tuple>
 #include <algorithm>
 
 #include "solution.hpp"

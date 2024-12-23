@@ -64,7 +64,7 @@ public:
         if (idx >= 0)
             positive_buffer[idx] = c;
         else
-            negative_buffer[negative_buffer.size() + idx];
+            negative_buffer[negative_buffer.size() + idx] = c;
     }
 
     bool

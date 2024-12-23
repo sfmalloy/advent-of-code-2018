@@ -31,8 +31,11 @@ def main():
         if os.path.exists(filename):
             print_file(filename)
         else:
-            cookies = {'session': os.environ['AOC_SESSION']}
-            request = requests.get(f'https://adventofcode.com/{YEAR}/day/{day_num}/input', cookies=cookies)
+            request = requests.get(
+                f'https://adventofcode.com/{YEAR}/day/{day_num}/input',
+                cookies={'session': os.environ['AOC_SESSION']},
+                headers={'User-Agent': 'email:sfmalloy.dev@gmail.com repo:https://github.com/sfmalloy/advent-of-code-2018'}
+            )
             if request.status_code != 200:
                 print(f'Error in retrieving input: Code {request.status_code}')
                 exit(-1)
