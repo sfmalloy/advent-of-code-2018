@@ -1,6 +1,7 @@
 #include <iostream>
 #include <unordered_map>
 #include <string>
+#include <cmath>
 
 #include "solution.hpp"
 #include "utils.hpp"
@@ -61,8 +62,7 @@ struct ProgramLine {
 };
 
 void run(i32* ip, const std::vector<ProgramLine>& prog);
-
-#define D19_DEBUG
+u32 factor_sum(bool part2, i32* ip, const std::vector<ProgramLine>& prog);
 
 template<>
 void
@@ -84,48 +84,35 @@ solution<19>::solve(std::ifstream& input)
         prog.emplace_back(instruction_fn[ins], a, b, c);
     }
 
-    // run(ip, prog);
-    // std::cout << registers[0] << '\n';
-
-    for (i32 i = 0; i < 6; ++i)
-    {
-        registers[i] = 0;
-    }
-    registers[0] = 1;
-    run(ip, prog);
-
-    std::cout << registers[0] << '\n';
+    std::cout << factor_sum(false, ip, prog) << '\n';
+    std::cout << factor_sum(true, ip, prog) << '\n';
 }
 
 void run(i32* ip, const std::vector<ProgramLine>& prog)
 {
-    while (*ip >= 0 && *ip < prog.size())
-    {
-#ifdef D19_DEBUG
-        if (*ip == 8)
-        {
-            std::cout << *ip << " [";
-            for (auto reg : registers)
-            {
-                std::cout << reg << ", ";
-            }
-            std::cout << "] ";
-        }
-#endif
+    while (*ip != 6) {
         prog[*ip].ins(prog[*ip].a, prog[*ip].b, prog[*ip].c);
         *ip += 1;
-#ifdef D19_DEBUG
-        if (*ip == 8)
-        {
-            // 10551315
-            //  2413327
-            std::cout << *ip << " [";
-            for (auto reg : registers)
-            {
-                std::cout << reg << ", ";
-            }
-            std::cout << "]\n";
-        }
-#endif
     }
+}
+
+u32 factor_sum(bool part2, i32* ip, const std::vector<ProgramLine>& prog)
+{
+    for (i32 i = 0; i < 6; ++i) {
+        registers[i] = 0;
+    }
+    if (part2) {
+        registers[0] = 1;
+    }
+
+    run(ip, prog);
+
+    u32 ans = 1 + (registers[1] % 2 == 0);
+    for (u32 i = 3; i <= registers[1]; i += 2) {
+        if (registers[1] % i == 0) {
+            ans += i;
+        }
+    }
+    
+    return ans;
 }
