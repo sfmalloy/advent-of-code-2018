@@ -137,6 +137,7 @@ solution<22>::solve(std::ifstream& input)
             break;
         }
 
+        auto item_arr = region_item[cave[curr.pos]];
         for (const auto& dir : {U, L, D, R}) {
             auto next = curr.pos + dir;
             if (next.real() >= 0 and next.imag() >= 0) {
@@ -144,7 +145,7 @@ solution<22>::solve(std::ifstream& input)
                     cave[next] = erosion(next, target, depth, erosion_map) % 3;
                 }
                 for (u32 item : region_item[cave[next]]) {
-                    if (!has(item, region_item[cave[curr.pos]], 2)) {
+                    if (item_arr[0] != item and item_arr[1] != item) {
                         continue;
                     }
                     auto n = Node(next, item);
