@@ -1,11 +1,13 @@
+#include <algorithm>
 #include <complex>
 #include <cstddef>
 #include <cstdlib>
 #include <functional>
 #include <limits>
+#include <ostream>
+#include <queue>
 #include <string>
 #include <unordered_map>
-#include <unordered_set>
 #include <utility>
 #include <vector>
 
@@ -118,19 +120,14 @@ solution<22>::solve(std::ifstream& input)
     std::unordered_map<Node, u32> dists;
     dists[src] = 0;
 
-    // this is really really really slow. TODO: make a heap with dist-pointers instead
-    std::unordered_set<Node> q;
-    q.insert(src);
-    while (!q.empty()) {
-        auto best = std::numeric_limits<i32>::max();
-        auto curr = src;
-        for (auto& n : q) {
-            if (dists[n] < best) {
-                curr = n;
-                best = dists[n];
-            }
-        }
-        q.erase(q.find(curr));
+    auto cmp = [&dists](const Node& a, const Node& b){
+        return dists[a] > dists[b];
+    };
+    std::priority_queue<Node, std::vector<Node>, decltype(cmp)> q{cmp};
+    q.push(src);
+    while (true) {
+        Node curr = q.top();
+        q.pop();
 
         if (curr.pos == target) {
             if (curr.item != TORCH) {
@@ -142,7 +139,6 @@ solution<22>::solve(std::ifstream& input)
 
         for (const auto& dir : {U, L, D, R}) {
             auto next = curr.pos + dir;
-
             if (next.real() >= 0 and next.imag() >= 0) {
                 if (!cave.contains(next)) {
                     cave[next] = erosion(next, target, depth, erosion_map) % 3;
@@ -158,7 +154,7 @@ solution<22>::solve(std::ifstream& input)
                     auto dist = dists[curr] + (item == curr.item ? 1 : 8);
                     if (dist < dists[n]) {
                         dists[n] = dist;
-                        q.insert(n);
+                        q.push(n);
                     }
                 }
             }
