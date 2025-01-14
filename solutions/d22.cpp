@@ -1,4 +1,3 @@
-#include <algorithm>
 #include <complex>
 #include <cstddef>
 #include <cstdlib>
@@ -78,16 +77,6 @@ u32 erosion(std::complex<i32> pos, std::complex<i32> target, u32 depth, std::uno
     }
     return map[pos];
 }
-
-bool has(u32 item, const u32* arr, u32 L) {
-    for (u32 i = 0; i < L; ++i) {
-        if (arr[i] == item) {
-            return true;
-        }
-    }
-    return false;
-}
-
 
 template <>
 void
