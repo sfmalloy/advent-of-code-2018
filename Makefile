@@ -20,7 +20,7 @@ vpath %.cpp $(SRCDIR)/
 vpath %.cpp $(SOLDIR)/
 
 # Object files
-OBJS = advent.o option_parser.o timer.o utils.o d01.o d02.o d03.o d04.o d05.o d06.o d07.o d08.o d09.o d10.o d11.o d12.o d13.o d14.o d15.o d16.o d17.o d18.o d19.o d20.o d21.o d22.o d23.o d24.o d25.o
+OBJS = advent.o option_parser.o timer.o utils.o vec.o d01.o d02.o d03.o d04.o d05.o d06.o d07.o d08.o d09.o d10.o d11.o d12.o d13.o d14.o d15.o d16.o d17.o d18.o d19.o d20.o d21.o d22.o d23.o d24.o d25.o
 
 # C++ compiler flags
 # Use the first for debugging, the second for release
