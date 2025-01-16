@@ -239,9 +239,7 @@ build_tree(std::string::iterator& iter, std::string::iterator end, u32 indent = 
             base += *iter;
         }
     }
-    // if (base.length() > 0) {
-        subregex->parts.push_back(std::make_shared<StringNode>(base));
-    // }
+    subregex->parts.push_back(std::make_shared<StringNode>(base));
     if (branches->choices.size() > 0) {
         if (subregex->parts.size() > 1) {
             branches->choices.push_back(subregex);
