@@ -6,6 +6,10 @@
 ########################################################
 # Variable definitions
 ########################################################
+ifndef LOUD
+MAKEFLAGS += --silent
+endif
+
 # C++ compiler
 # CXX = g++
 CXX := clang++

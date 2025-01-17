@@ -1,4 +1,3 @@
-#include <cassert>
 #include <iterator>
 #include <limits>
 #include <memory>
