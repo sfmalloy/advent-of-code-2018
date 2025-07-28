@@ -1,3 +1,6 @@
+**NOTE:** This repository is now archived. Please use [my solutions monorepo](https://github.com/sfmalloy/advent-of-code) to find any future changes.
+___
+
 # Advent Of Code 2018
 
 These are my solutions in C++ for Advent of Code 2018.
